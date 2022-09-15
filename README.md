@@ -13,7 +13,7 @@ The company have developed a ChatBot that register a person's favourite Pokémon
 
 ![ChatBot](imgs/chatbot.jpeg)
 
-We have extracted 50000 users conversations with the Chatbot and stored in a `CSV` file separeted by `;`. This file is saved in a public S3 bucket, and can be accessed in `s3://---REDACTED---`.[ˆ1]
+We have extracted 50000 users conversations with the Chatbot and stored in a `CSV` file separeted by `;`. This file is saved in a public S3 bucket, and can be accessed in `s3://---REDACTED---`.[^1]
 
 Each line of that file is a message with the following information:
 
@@ -73,4 +73,4 @@ Since Spark is cloud agnostic, this means our solution can run in `AWS`, `GCP`, 
 
 As one can note, you need both `docker` and `docker-compose`.
 
-[ˆ1] Redacted to protect the company's identity.
+[^1]: Redacted to protect the company's identity.

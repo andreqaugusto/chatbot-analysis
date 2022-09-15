@@ -16,7 +16,7 @@ The above architecture uses primarily [Google Cloud](https://cloud.google.com/) 
 - a **loading** layer. This layer is responsible for receiving all the extracted data from the original source. Common used technologies are [AWS S3](https://aws.amazon.com/s3/) and [Google Cloud Storage](https://cloud.google.com/storage);
 - a **transformation** layer. For reasons that we shall discuss later, we chose to use a Spark cluster to process the data. Preferably, we would use a managed solution like [AWS EMR](https://aws.amazon.com/emr/) or [Google Cloud Dataproc](https://cloud.google.com/dataproc);
 - a query engine capable of querying the data directly in the object storage (like [AWS Athena](https://aws.amazon.com/athena/) or [BigQuery External Queries](https://cloud.google.com/bigquery/docs/external-data-cloud-storage?hl=en)) or a proper data warehouse to load all the cleaned & transformed data for analysis (e.g. [BigQuery](https://cloud.google.com/bigquery) or [Snowflake](https://www.snowflake.com/));
-- an **orchestration** tool to manage all the data lifecycle ([dagster](dagster.io) is a preferred choice of mine).
+- an **orchestration** tool to manage all the data lifecycle ([dagster](http://dagster.io) is a preferred choice of mine).
 
 The choice for Spark as the data processing engine is not only because we used ourselves to solve the challenge: as we went through the given data, we saw that some of the necessary transformations required a more complex logic than what standard SQL could offer.
 
@@ -33,3 +33,4 @@ In this architecture, each layer has a different responsability:
 - in the Bronze layer we would do some basic casting and testing (to see if the data matches with what we expect it to be). Looking back at the [/notebooks/data_treatment.ipynb](../notebooks/data_treatment.ipynb) notebook, the goal of this layer is very similar to what we did in the `Casting` and `Profiling` sections.
 - the Silver layer is responsible (mostly) for feature engineering and preparing the data for aggregations. It is in this layer that we correct wrong data (SaoPaulo -> São Paulo, for example), match two or more tables from the Bronze data to create business entities, etc.
 - finally, the Gold layer has the data that should be the source of truth for an enterprise. It is here that we store all the tables with the important metrics for business.
+  
