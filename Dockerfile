@@ -13,10 +13,10 @@ ENV SPARK_HOME=/opt/spark
 ENV SPARK_NO_DAEMONIZE=true
 ENV PYTHONHASHSEED=1
 
-RUN wget -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
-RUN mkdir -p /opt/spark 
-RUN tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 
-RUN rm apache-spark.tgz
+RUN wget -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" && \
+    mkdir -p /opt/spark && \
+    tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 && \
+    rm apache-spark.tgz
 
 WORKDIR ${SPARK_HOME}
 
@@ -28,8 +28,8 @@ CMD ["/bin/bash", "/start-spark.sh"]
 
 FROM builder as notebook
 
-RUN apt-get update && apt-get install -y python3 python3-pip 
-RUN pip3 install pyspark==${SPARK_VERSION} jupyterlab==${JUPYTERLAB_VERSION}
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    pip3 install pyspark==${SPARK_VERSION} jupyterlab==${JUPYTERLAB_VERSION}
 
 EXPOSE 8889
 
