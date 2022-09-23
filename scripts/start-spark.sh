@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. "/opt/spark/bin/load-spark-env.sh"
-
 if [ "$SPARK_MODE" == "master" ];
 then
     export SPARK_MASTER_HOST=`hostname`

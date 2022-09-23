@@ -14,8 +14,8 @@ ENV SPARK_NO_DAEMONIZE=true
 ENV PYTHONHASHSEED=1
 
 RUN wget -O apache-spark.tgz "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" && \
-    mkdir -p /opt/spark && \
-    tar -xf apache-spark.tgz -C /opt/spark --strip-components=1 && \
+    mkdir -p ${SPARK_HOME} && \
+    tar -xf apache-spark.tgz -C ${SPARK_HOME} --strip-components=1 && \
     rm apache-spark.tgz
 
 WORKDIR ${SPARK_HOME}
