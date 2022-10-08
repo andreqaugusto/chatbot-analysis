@@ -9,5 +9,5 @@ elif [ "$SPARK_MODE" == "worker" ];
 then
     cd ${SPARK_HOME}/sbin && ./start-worker.sh --webui-port $SPARK_WORKER_WEBUI_PORT $SPARK_MASTER_URL
 else
-    echo "Undefined Workload Type $SPARK_MODE, must specify: master, worker"
+    echo "Undefined workload type $SPARK_MODE. Please specify one of those: master, worker"
 fi
