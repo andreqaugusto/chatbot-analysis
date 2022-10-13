@@ -9,6 +9,7 @@ services:
       - "8889:8889"
     volumes:
       - .:/app/:rw
+
   spark:
     build:
       context: .
@@ -23,24 +24,25 @@ services:
       SPARK_MASTER_WEBUI_PORT: 8080
     volumes:
       - .:/app/:rw
+
   spark-worker:
     build:
       context: .
       dockerfile: ./Dockerfile
       target: apache-spark
     ports:
-      - "9091:8080"
+      - "9091:9091"
       - "7000:7000"
     depends_on:
       - spark
     environment:
       SPARK_MODE: worker
       SPARK_MASTER_URL: spark://spark:7077
+      # see https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts 
+      # for the following environment variables meaning
       SPARK_WORKER_PORT: 7000
-      SPARK_WORKER_WEBUI_PORT: 8080
+      SPARK_WORKER_WEBUI_PORT: 9091
       SPARK_WORKER_CORES: 1
       SPARK_WORKER_MEMORY: 1G
-      SPARK_DRIVER_MEMORY: 1G
-      SPARK_EXECUTOR_MEMORY: 1G
     volumes:
       - .:/app/:rw
