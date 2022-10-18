@@ -1,6 +1,6 @@
-FROM openjdk:11-jre-slim as builder
+FROM eclipse-temurin:11 as builder
 
-RUN apt-get update && apt-get install -y curl vim wget software-properties-common ssh net-tools ca-certificates 
+RUN apt-get update
 
 ENV SPARK_VERSION=3.2.2
 ENV HADOOP_VERSION=3.2
